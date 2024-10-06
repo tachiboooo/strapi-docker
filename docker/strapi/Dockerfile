@@ -13,6 +13,10 @@ WORKDIR /opt/app
 COPY ./app ./
 
 RUN chmod -R 777 /opt/app
+
+# node_modules を削除し、npm キャッシュをクリアして再インストール
+RUN rm -rf node_modules && npm cache clean --force && npm install
+
 USER node
 RUN npm run build
 
